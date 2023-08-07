@@ -1,0 +1,50 @@
+env:
+  mta-source-dir: .
+  mtar-dir: gen
+  mtar-file: microservices.mtar
+on:
+ push:
+     
+jobs:
+
+  deployment:
+    name: To BTP
+    runs-on: ubuntu-latest
+    
+   
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16
+    - uses: actions/cache@v2
+      id: cache
+      with:
+        path: ${{ env.mtar-dir }}/${{ env.mtar-file }}
+        key: ${{ runner.os }}-${{ github.head_ref || github.ref_name }}-${{ hashFiles('_i18n/**','app/**','db/**','srv/**','*.json','**/mta.yaml','pom.xml') }}
+
+ 
+
+    - name: MTA build
+      # if: steps.cache.outputs.cache-hit != 'true'
+      run: npx mbt build -s ${{ env.mta-source-dir }} -t ${{ env.mtar-dir }} --mtar ${{ env.mtar-file }}
+
+ 
+
+    # - name: CF Deploy
+    #   id: deploy
+    #   uses: ./.github/actions/cf-deploy
+    #   with:
+    #     createspace: false
+    #     mtafile: ${{ inputs.mtar-dir }}/${{ inputs.mtar-file }}
+    #     findurl_command: 'cf html5-list -di sflight-destination-service -u'
+
+ 
+
+    # - name: Assign Roles
+    #   uses: ./.github/actions/btp
+    #   with:
+    #     cli_url: ${{ inputs.btp-cli-url }}
+    #     subdomain: ${{ inputs.btp-subdomain }}
+    #     subaccount_id: ${{ inputs.btp-subaccount-id }}
+    #     role_collection: ${{ inputs.role-collection }}
