@@ -14,9 +14,9 @@ jobs:
       - name: Set up Cloud Foundry CLI
         uses: elliottpope/cloudfoundry-cli-action@v6
         with:
-          cf_api: https://api.cf.ca10.hana.ondemand.com
-          cf_username: richa.khosla@canadapost.postescanada.ca
-          cf_password: Request@2023
-          cf_org: CPEA-Innovapost Inc_development-dn6yj4ti
-          cf_space: devspace
-          command: cf help -a
+          CF_API: https://api.cf.ca10.hana.ondemand.com
+          USERNAME: richa.khosla@canadapost.postescanada.ca
+          PASSWORD: Request@2023
+          ORG: CPEA-Innovapost Inc_development-dn6yj4ti
+          SPACE: devspace
+          COMMAND: cf help -a
