@@ -1,0 +1,22 @@
+name: Deploy to Cloud Foundry
+
+on:
+  push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Cloud Foundry CLI
+        uses: citizen-of-planet-earth/cf-cli-action@v2
+        with:
+          cf_api: https://api.cf.ca10.hana.ondemand.com
+          cf_username: richa.khosla@canadapost.postescanada.ca
+          cf_password: Request@2023
+          cf_org: CPEA-Innovapost Inc_development-dn6yj4ti
+          cf_space: devspace
+          command: cf api
