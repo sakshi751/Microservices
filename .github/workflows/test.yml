@@ -19,4 +19,4 @@ jobs:
           cf_password: Request@2023
           cf_org: CPEA-Innovapost Inc_development-dn6yj4ti
           cf_space: devspace
-          command: cf7 login
+          command: deploy zmicro.mtar
