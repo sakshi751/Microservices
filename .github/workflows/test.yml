@@ -28,6 +28,6 @@ jobs:
           sudo mv cf /usr/local/bin/
 
       - name: Verify CF CLI installation
-        run: cf --version
+        run: /usr/local/bin/cf --version
 
       # Add more steps for your deployment process here
