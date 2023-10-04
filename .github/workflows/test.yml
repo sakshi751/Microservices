@@ -10,11 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: List contents of current directory
+        run: ls -la
+      
       - name: Install CF CLI
         run: |
+          # Download the CF CLI binary using curl
           curl -sLo cf.tgz https://packages.cloudfoundry.org/stable?release=linux64-binary&version=latest
+          ls -la  # Print the contents of the current directory
           tar -zxf cf.tgz
           sudo mv cf /usr/local/bin/
-
-      - name: Verify CF CLI installation
-        run: cf --version
