@@ -16,18 +16,8 @@ jobs:
 
       - name: Install CF CLI
         run: |
-          # Download the CF CLI binary using curl
           wget -q -O cf.tar.gz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=7.4.0&source=github-rel"
-           # Print the contents of the current directory for debugging
-          ls -la
-          $pwd
-          # Extract the CF CLI binary
-          tar -zxvf cf.tar.gz
+          sudo tar xzf cf.tar.gz --wildcards --directory /usr/local/bin/ "cf*"
+          /usr/local/bin/cf --version
 
-          # Move the CF CLI binary to a directory in your PATH
-          sudo mv cf $pwd
-
-      - name: Verify CF CLI installation
-        run: $pwd/cf --version
-
-      # Add more steps for your deployment process here
+    
