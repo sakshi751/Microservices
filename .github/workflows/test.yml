@@ -17,8 +17,9 @@ jobs:
       - name: Install CF CLI
         run: |
           # Download the CF CLI binary using curl
-          wget -O cf.tgz https://packages.cloudfoundry.org/stable?release=linux64-binary&version=latest
- 
+          for i in {1..5}; do
+           curl -sLo cf.tgz https://packages.cloudfoundry.org/stable?release=linux64-binary&version=latest && break || sleep 10
+          done
           # Print the contents of the current directory for debugging
           ls -la
 
