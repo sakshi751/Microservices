@@ -3,7 +3,7 @@
 #   mtar-dir: gen
 #   mtar-file: microservices.mtar
 # on:
-#  push:
+#  pull
      
 # jobs:
 
