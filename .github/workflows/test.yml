@@ -18,13 +18,11 @@ jobs:
         run: |
           # Download the CF CLI binary using curl
           wget -q -O cf.tar.gz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=7.4.0&source=github-rel"
-          sudo tar xzf cf.tar.gz --wildcards --directory /usr/local/bin/ "cf*"
-
-          # Print the contents of the current directory for debugging
+           # Print the contents of the current directory for debugging
           ls -la
-
+          $pwd
           # Extract the CF CLI binary
-          tar -zxvf cf.tgz
+          tar -zxvf cf.tar.gz
 
           # Move the CF CLI binary to a directory in your PATH
           sudo mv cf /usr/local/bin/
