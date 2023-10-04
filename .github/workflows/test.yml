@@ -8,15 +8,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: List contents of current directory
         run: ls -la
-      
+
       - name: Install CF CLI
         run: |
           # Download the CF CLI binary using curl
-          curl -sLo cf.tgz https://packages.cloudfoundry.org/stable?release=linux64-binary&version=latest
-          ls -la  # Print the contents of the current directory
-          tar -zxf cf.tgz
+          curl -L -o cf.tgz "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=latest"
+          
+          # Print the contents of the current directory for debugging
+          ls -la
+
+          # Extract the CF CLI binary
+          tar -zxvf cf.tgz
+
+          # Move the CF CLI binary to a directory in your PATH
           sudo mv cf /usr/local/bin/
+
+      - name: Verify CF CLI installation
+        run: cf --version
+
+      # Add more steps for your deployment process here
